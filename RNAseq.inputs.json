@@ -1,0 +1,15 @@
+{
+  "RNAseq.inputSamplesFile": "samples.list",
+  
+  "RNAseq.star_index": "/gpfs/ycga/project/lek/shared/resources/GRCm38.p6/starIndex_GRCm38.p6",
+  "RNAseq.rsem_index": "/gpfs/ycga/project/lek/shared/resources/GRCm38.p6/rsem_reference",
+
+  "RNAseq.genes_gtf": "/gpfs/ycga/project/lek/shared/resources/GRCm38.p6/gencode.vM22.genes.gtf",
+  "RNAseq.exons_bed": "/gpfs/ycga/project/lek/shared/resources/GRCm38.p6/gencode.vM22.exons.bed",
+
+  "RNAseq.run_STAR": "/gpfs/ycga/project/lek/shared/tools/RNAseq/python_scripts/run_STAR.py",
+  "RNAseq.run_md": "/gpfs/ycga/project/lek/shared/tools/RNAseq/python_scripts/run_MarkDuplicates.py",
+  "RNAseq.run_RSEM": "/gpfs/ycga/project/lek/shared/tools/RNAseq/python_scripts/run_RSEM.py",
+  "RNAseq.rnaseqcfile": "/gpfs/ycga/project/lek/shared/tools/RNAseq/rnaseqc.v2.3.4.linux",
+  "RNAseq.plotscript": "/gpfs/ycga/project/lek/shared/tools/RNAseq/python_scripts/plot.py"
+}
