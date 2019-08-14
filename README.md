@@ -17,11 +17,9 @@ The gtf and fasta files were downloaded from gencode and unzipped with `gzip -d`
 
 To make collapsed gtf file [gtex instructions and script](https://github.com/broadinstitute/gtex-pipeline/tree/master/gene_model) were used: `python3 collapse_annotation.py gencode.vM22.annotation.gtf gencode.vM22.genes.gtf`
 
-Plotting script needs an exons bed file to assess fragment sizes. This was made by using the following commands:
+Plotting script needs an exons bed file to assess fragment sizes. This was made by using the following command:
 ```
-cat gencode.vM22.genes.gtf | grep 'exon' | cut -f1,4,5 > gencode.vM22.exons.bed
-cat gencode.vM22.exons.bed | sort -V -k1,1 -k2,2 | less
-cat gencode.vM22.exons.bed | sort -V -k1,1 -k2,2 > gencode.vM22.exons.sorted.bed
+cat gencode.vM22.genes.gtf | grep 'exon' | cut -f1,4,5 | sort -V -k1,1 -k2,2 > gencode.vM22.exons.sorted.bed
 ```
 
 
