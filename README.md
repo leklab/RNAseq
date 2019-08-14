@@ -27,7 +27,7 @@ The following modules were used on Ruddle cluster.
 ```
 These were saved into module collection `star` by `module save star`
 
-# Building indeces for STAR and RSEM
+# Building indices for STAR and RSEM
 
 This has to be done only once per genome.
 Scripts `makeRSEMindex.sh` and `makeSTARindex.sh` were used.
