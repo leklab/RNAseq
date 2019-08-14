@@ -33,7 +33,9 @@ The following modules were used on Ruddle cluster.
  module load Python/3.5.1-foss-2016b
  module load SAMtools/1.9-foss-2016b
 ```
-These were saved into module collection `star` by `module save star`
+These were saved into module collection `star` by `module save star`.
+
+Plotting script needs many python modules installed, see [here](https://github.com/broadinstitute/rnaseqc/tree/master/python). One way is to use conda environment.
 
 # Building indices for STAR and RSEM
 
@@ -42,13 +44,11 @@ Scripts `makeRSEMindex.sh` and `makeSTARindex.sh` were used.
 
 # Running the pipeline
 
-First prepare the sample sheet.
+First prepare the sample sheet. It has three columns: `SampleID|fastq1|fastq2`, make sure that fastq files have absolute paths.
 
-Make sure the inputs file is correct.
+I prefer to copy `RNAseq.inputs.json`, `launch_cromwell.sh` and `cromwell.options` file into working directory. No need to copy wdl. Make sure that all the files are correct and updated if needed.
 
-Update `cromwell.options` file with you working directory path.
-
-Generate the launch script and launch it.
+And then you are ready to launch the script.
 
 `sbatch launch_cromwell.sh`
 
