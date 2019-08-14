@@ -4,7 +4,7 @@ Pipeline for RNAseq data processing
 # General comments
 The pipeline follows [gtex-TOPMed pipeline](https://github.com/broadinstitute/gtex-pipeline/blob/master/TOPMed_RNAseq_pipeline.md), but is optimized for Yale HPC, which uses slurm queueing system.
 
-The python scripts are downloaded from [gtex github](https://github.com/broadinstitute/gtex-pipeline/tree/master/rnaseq/src), the RNA-SeQC was downloaded and setup as instructedf [here](https://github.com/broadinstitute/rnaseqc).
+The python scripts are downloaded from [gtex github](https://github.com/broadinstitute/gtex-pipeline/tree/master/rnaseq/src), the RNA-SeQC was downloaded and setup as instructedf [here](https://github.com/broadinstitute/rnaseqc). The plot script was slightly modified to meet needs, for example metrics and expression databases are now output as csv files. 
 
 The scripts currently use mouse genome, but are applicable for human genome as well.
 
