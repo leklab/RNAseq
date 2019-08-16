@@ -71,9 +71,9 @@ workflow RNAseq {
 		Array[File] md_bam_index = markdDuplicates.bam_index
 		Array[File] md_metricx = markdDuplicates.metrics
 		Array[File] transcriptome_bam = star.transcriptome_bam
-		Array[File] chimeric_junctions = star.chimeric_junctions
-		Array[File] chimeric_bam_file = star.chimeric_bam_file
-		Array[File] chimeric_bam_index = star.chimeric_bam_index
+		#Array[File] chimeric_junctions = star.chimeric_junctions
+		#Array[File] chimeric_bam_file = star.chimeric_bam_file
+		#Array[File] chimeric_bam_index = star.chimeric_bam_index
 		Array[File] junctions = star.junctions
 		Array[File]	junctions_pass1 = star.junctions_pass1
 		Array[File] read_counts = star.read_counts
@@ -101,11 +101,11 @@ task star {
   String run_STAR
 
   command {
-    python $run_STAR \
-        $star_index \
-        $fastq1 \
-        $fastq2 \
-        $sample \
+    python ${run_STAR} \
+        ${star_index} \
+        ${fastq1} \
+        ${fastq2} \
+        ${sample} \
         --threads 16 \
         --output_dir .
   }
@@ -118,9 +118,9 @@ task star {
     File bam_file = "${sample}.Aligned.sortedByCoord.out.bam"
     File bam_index = "${sample}.Aligned.sortedByCoord.out.bam.bai"
     File transcriptome_bam = "${sample}.Aligned.toTranscriptome.out.bam"
-    File chimeric_junctions = "${sample}.Chimeric.out.junction"
-    File chimeric_bam_file = "${sample}.Chimeric.out.sorted.bam"
-    File chimeric_bam_index = "${sample}.Chimeric.out.sorted.bam.bai"
+    #File chimeric_junctions = "${sample}.Chimeric.out.junction"
+    #File chimeric_bam_file = "${sample}.Chimeric.out.sorted.bam"
+    #File chimeric_bam_index = "${sample}.Chimeric.out.sorted.bam.bai"
     File read_counts = "${sample}.ReadsPerGene.out.tab"
     File junctions = "${sample}.SJ.out.tab"
     File junctions_pass1 = "${sample}._STARpass1/SJ.out.tab"
@@ -136,11 +136,11 @@ task markdDuplicates {
 
 
 	command {
-		python  $run_md \
-        --jar $EBROOTPICARD/picard.jar \
-        ${input_bam} \
-        ${sample}.Aligned.sortedByCoord.out.md \
-        --output_dir .
+		python  ${run_md} \
+        	--jar $EBROOTPICARD/picard.jar \
+        	${input_bam} \
+        	${sample}.Aligned.sortedByCoord.out.md \
+        	--output_dir .
 
 		java -jar $EBROOTPICARD/picard.jar BuildBamIndex I=${sample}.Aligned.sortedByCoord.out.md.bam
 	}
@@ -167,11 +167,11 @@ task rsem {
 
 
 	command {
-		python $run_RSEM \
-        $rsem_index \
-        ${input_bam} \
-        ${sample} \
-        --threads 16
+		python ${run_RSEM} \
+        	${rsem_index} \
+        	${input_bam} \
+        	${sample} \
+        	--threads 16
     }
 	
 	runtime {
@@ -197,8 +197,8 @@ task rnaseqc {
 
 	command {
 		
-		$rnaseqcfile ${genes_gtf} ${input_bam} ${sample}_QC -vv --coverage --bed $exons_bed -s $sample
-		tar -cfz ${sample}_QC.tar.gz ${sample}_QC
+		${rnaseqcfile} ${genes_gtf} ${input_bam} ${sample}_QC -vv --coverage --bed ${exons_bed} -s ${sample}
+		tar -czvf ${sample}_QC.tar.gz ${sample}_QC
     }
 	
 	runtime {
@@ -220,10 +220,15 @@ task plotqc {
 
 	command {
 		
-		tar -xzf *_QC.tar.gz
+                cp ${qc_results} .
 
-		python $plotscript *_QC project_QC.ipynb
-    }
+		for filename in *.tar.gz
+		do
+			tar zxf $filename
+		done
+
+		python ${plotscript} *_QC project_QC.ipynb
+    } 
 	
 	runtime {
 	    cpus: 4
@@ -237,4 +242,5 @@ task plotqc {
   	}
 	
 }
+
 
