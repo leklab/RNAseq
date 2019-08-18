@@ -1,0 +1,9 @@
+{
+  "RNASeQC.inputSamplesFile": "bams.list",
+
+  "RNASeQC.genes_gtf": "/gpfs/ycga/project/lek/shared/resources/GRCm38.p6/gencode.vM22.genes.gtf",
+  "RNASeQC.exons_bed": "/gpfs/ycga/project/lek/shared/resources/GRCm38.p6/gencode.vM22.exons.bed",
+
+  "RNASeQC.rnaseqcfile": "/gpfs/ycga/project/lek/shared/tools/RNAseq/rnaseqc.v2.3.4.linux",
+  "RNASeQC.plotscript": "/gpfs/ycga/project/lek/shared/tools/RNAseq/python_scripts/plot.py"
+}

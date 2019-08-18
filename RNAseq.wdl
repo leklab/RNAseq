@@ -33,6 +33,7 @@ workflow RNAseq {
 			input:
 				run_md = run_md,
 				input_bam = star.bam_file,
+				input_bam_index = star.bam_index,
 				sample = sample[0]
 		}
 
@@ -47,6 +48,7 @@ workflow RNAseq {
 		call rnaseqc{
 			input:
 				input_bam = markdDuplicates.bam_file,
+				input_bam_index = markdDuplicates.bam_index,
 				genes_gtf = genes_gtf,
 				exons_bed = exons_bed,
 				sample = sample[0],
@@ -83,7 +85,7 @@ workflow RNAseq {
 		Array[File] qc = rnaseqc.qc
 		File nb = plotqc.nb
 		File expr = plotqc.expr
-        File metrics = plotqc.metrics
+	        File metrics = plotqc.metrics
 
   	}
 
@@ -132,6 +134,7 @@ task markdDuplicates {
 
 	String run_md
 	File input_bam
+	File input_bam_index
 	String sample
 
 
@@ -191,6 +194,7 @@ task rnaseqc {
 	String rnaseqcfile
 	String genes_gtf
 	File input_bam
+	File input_bam_index
 	String exons_bed
 	String sample
 
@@ -199,7 +203,7 @@ task rnaseqc {
 		
 		${rnaseqcfile} ${genes_gtf} ${input_bam} ${sample}_QC -vv --coverage --bed ${exons_bed} -s ${sample}
 		tar -czvf ${sample}_QC.tar.gz ${sample}_QC
-    }
+    	}
 	
 	runtime {
 	    cpus: 4
@@ -220,14 +224,18 @@ task plotqc {
 
 	command {
 		
-                cp ${qc_results} .
+                cp ${sep=' ' qc_results} .
 
-		for filename in *.tar.gz
-		do
-			tar zxf $filename
-		done
+                for filename in *.tar.gz
+                do
+                        tar zxf $filename
+                done
 
-		python ${plotscript} *_QC project_QC.ipynb
+                dir=`dirname ${plotscript}`
+                export PYTHONPATH=$PYTHONPATH:$dir
+
+                python ${plotscript} *_QC project_QC.ipynb
+
     } 
 	
 	runtime {
