@@ -35,7 +35,7 @@ The following modules were used on Ruddle cluster.
 ```
 These were saved into module collection `star` by `module save star`.
 
-Plotting script needs many python modules installed, see [here](https://github.com/broadinstitute/rnaseqc/tree/master/python). One way is to use conda environment.
+Plotting script needs many python modules installed, see [here](https://github.com/broadinstitute/rnaseqc/tree/master/python). One way is to use conda environment. Make sure if you use conda environment not to have version or installed python modules issues between python installs.
 
 # Building indices for STAR and RSEM
 
@@ -52,4 +52,53 @@ And then you are ready to launch the script.
 
 `sbatch launch_cromwell.sh`
 
+# Outputs
 
+The whole pipeline finished in 3h45min for 15 sample RNAseq project.
+
+After the successfull completion of the pipeline, the outputs are buried into `RNAseq` directory (subdirectory of what you specified in `cromwell.options`). As the output directory still follows the directory structure from cromwell-executions, then it is best to move outputs to different directory, this can be achieved by the following.
+
+```
+mkdir output
+find RNAseq/800514a8-8d1f-4d84-a99d-0525a8dfc5ae/ -type f -exec mv {} output/ \; #change hash to your project
+rm output/std*
+```
+
+Now for each sample you should have the following output files:
+```
+${sample}.Aligned.sortedByCoord.out.md.bai
+${sample}.Aligned.sortedByCoord.out.md.bam
+${sample}.Aligned.sortedByCoord.out.md.marked_dup_metrics.txt
+${sample}.Aligned.toTranscriptome.out.bam
+${sample}.Log.final.out
+${sample}.Log.out
+${sample}.Log.progress.out
+${sample}_QC.tar.gz
+${sample}.ReadsPerGene.out.tab
+${sample}.rsem.genes.results
+${sample}.rsem.isoforms.results
+${sample}.SJ.out.tab
+```
+In addition you have three quality metrics files for the project:
+```
+project_expression_df.csv
+project_metrics.csv
+project_QC.ipynb
+```
+The project_QC.ipynb is a python notebook, which can be opened either by launching jupyter server or by other tools like [Pineapple](https://nwhitehead.github.io/pineapple/). The python notebook has many QC plots.
+
+# Running only QC
+
+If you already have bams and you want to run only QC on them use `rnaseqc.wdl` with the corresponding inputs and launch files. The input `bams.list` has to be a tsv file with two columns: a) sample_name b) absolute path to bam file.
+
+Moreover, if you have run RNASeqQC, but just want to make new plots, then you can just run the following command on interactive node. Be sure to have python3 and all necessary python modules in your environment.
+
+```
+#Only needed when you have QC as tar archives:
+for filename in *.tar.gz
+do
+    tar zxf $filename
+done
+
+python /gpfs/ycga/project/lek/shared/tools/RNAseq/python_scripts/plot.py *_QC project_QC.ipynb
+```
