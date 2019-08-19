@@ -231,9 +231,6 @@ task plotqc {
                         tar zxf $filename
                 done
 
-                dir=`dirname ${plotscript}`
-                export PYTHONPATH=$PYTHONPATH:$dir
-
                 python ${plotscript} *_QC project_QC.ipynb
 
     } 
