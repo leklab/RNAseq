@@ -1,5 +1,5 @@
 # RNAseq
-Pipeline for RNAseq data processing
+Pipeline for RNAseq data processing. Pipeline is implemented by Sander Pajusalu, Lek Lab, Yale. 
 
 # General comments
 The pipeline follows [gtex-TOPMed pipeline](https://github.com/broadinstitute/gtex-pipeline/blob/master/TOPMed_RNAseq_pipeline.md), but is optimized for Yale HPC, which uses slurm queueing system.
