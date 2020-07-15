@@ -35,6 +35,16 @@ The following modules were used on Ruddle cluster.
 ```
 These were saved into module collection `star` by `module save star`.
 
+To be compatible with human references downloaded from gtex I have used the following versions:
+```
+module load RSEM/1.3.0-foss-2016b
+module load STAR/2.5.3a-foss-2016b
+module load picard/2.9.0-Java-1.8.0_121
+module load Python/3.5.1-foss-2016b
+module load SAMtools/1.9-foss-2016b
+```
+These were saved into module collection `star` by `module save star253`.
+
 Plotting script needs many python modules installed, see [here](https://github.com/broadinstitute/rnaseqc/tree/master/python). One way is to use conda environment. Make sure if you use conda environment not to have version or installed python modules issues between python installs.
 
 # Building indices for STAR and RSEM
