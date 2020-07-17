@@ -112,3 +112,5 @@ done
 
 python /gpfs/ycga/project/lek/shared/tools/RNAseq/python_scripts/plot.py *_QC project_QC.ipynb
 ```
+
+If you want to add cohorts to QC plots, then provide additional argument `-c cohorts.tsv`, where cohorts.tsv has two columns, sample ID and cohort.
