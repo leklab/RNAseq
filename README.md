@@ -45,7 +45,17 @@ module load SAMtools/1.9-foss-2016b
 ```
 These were saved into module collection `star` by `module save star253`.
 
-Plotting script needs many python modules installed, see [here](https://github.com/broadinstitute/rnaseqc/tree/master/python). One way is to use conda environment. Make sure if you use conda environment not to have version or installed python modules issues between python installs.
+## Python module dependencies
+
+Plotting script needs many python modules installed, see [here](https://github.com/broadinstitute/rnaseqc/tree/master/python). 
+One way is to use conda environment. Make sure if you use conda environment not to have version or installed python modules issues 
+between python installs.  
+
+Another way is to install the Python module dependencies locally
+`pip install --user requirements.txt`
+
+Note: There is an incompatiblity issue when using the most recent version of `nbformat` with earlier versions of Python 3 
+and have updated the above with `Python/3.8.6-GCCcore-10.2.0`
 
 # Building indices for STAR and RSEM
 
