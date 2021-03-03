@@ -1,6 +1,8 @@
 {
     "final_workflow_outputs_dir": "/home/sp2249/scratch60/test",
     "final_workflow_log_dir": "/home/sp2249/scratch60/test",
-    "final_call_logs_dir": "/home/sp2249/scratch60/test"
+    "final_call_logs_dir": "/home/sp2249/scratch60/test",
+    "delete_intermediate_output_files": true,
+    "use_relative_output_paths": true
 }
 
