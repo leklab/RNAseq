@@ -30,7 +30,7 @@ The following modules were used on Ruddle cluster.
  module load RSEM/1.3.0-foss-2016b
  module load STAR/2.7.1a-foss-2016b
  module load picard/2.9.0-Java-1.8.0_121
- module load Python/3.5.1-foss-2016b
+ module load Python/3.8.6-GCCcore-10.2.0
  module load SAMtools/1.9-foss-2016b
 ```
 These were saved into module collection `star` by `module save star`.
@@ -40,7 +40,7 @@ To be compatible with human references downloaded from gtex I have used the foll
 module load RSEM/1.3.0-foss-2016b
 module load STAR/2.5.3a-foss-2016b
 module load picard/2.9.0-Java-1.8.0_121
-module load Python/3.5.1-foss-2016b
+module load Python/3.8.6-GCCcore-10.2.0
 module load SAMtools/1.9-foss-2016b
 ```
 These were saved into module collection `star` by `module save star253`.
