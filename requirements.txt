@@ -1,0 +1,4 @@
+matplotlib
+nbformat
+seaborn
+sklearn
